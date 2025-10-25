@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Gemini API Setup & Model Definitions ---
     // !!! WARNING: REPLACE THIS VALUE with your actual API key. !!!
     // If you paste your key, it must be inside the quotation marks: "AIzaSy..."
-    const GEMINI_API_KEY = "AIzaSyBTk4yr0jNFwMxh4bjv1fCazmWq_fPEcck"; 
+    const GEMINI_API_KEY = ""; 
     
     // Model selection based on user request
     const GEMINI_PRO_MODEL = "gemini-2.5-pro";
@@ -336,4 +336,5 @@ document.addEventListener('DOMContentLoaded', () => {
         currentChatId = chats[0].id; 
         updateInputPlaceholder(); 
     }
+
 });
