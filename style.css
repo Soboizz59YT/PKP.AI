@@ -1,0 +1,289 @@
+/* --- Global & Theme Setup --- */
+:root {
+    --bg-dark: #000000;
+    --bg-light: #0A0A10;
+    --color-neon: #33ffcc;
+    --color-text: #e0e0e0;
+    --shadow-intensity: 0 0 10px var(--color-neon), 0 0 20px var(--color-neon), 0 0 40px rgba(51, 255, 204, 0.4);
+}
+
+body {
+    margin: 0;
+    font-family: 'Orbitron', Arial, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--color-text);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- Main Content (Initial State: Centers Input) --- */
+#main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center input initially */
+    position: relative;
+    padding: 20px;
+    transition: padding-left 0.5s ease;
+}
+
+/* --- Tools Dropdown Styling --- */
+#tools-dropdown-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 50; 
+    opacity: 0; /* Hidden initially */
+    transform: translateY(-20px); 
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+body.chat-active #tools-dropdown-container {
+    opacity: 1; /* Show when chat is active */
+    transform: translateY(0);
+}
+
+#tools-btn {
+    background-color: var(--bg-light);
+    color: var(--color-neon);
+    border: 1px solid var(--color-neon);
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-intensity);
+    transition: all 0.2s;
+}
+
+#tools-btn:hover {
+    background-color: rgba(51, 255, 204, 0.1);
+    box-shadow: 0 0 20px var(--color-neon);
+}
+
+#tools-menu {
+    position: absolute;
+    top: 100%; 
+    right: 0;
+    background-color: var(--bg-light);
+    border: 1px solid var(--color-neon);
+    border-radius: 5px;
+    box-shadow: var(--shadow-intensity);
+    min-width: 150px;
+    padding: 5px 0;
+    z-index: 51;
+}
+
+#tools-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: var(--color-text);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#tools-menu a:hover,
+#tools-menu a.active-tool { /* Highlight active tool */
+    background-color: rgba(51, 255, 204, 0.1);
+    color: var(--color-neon);
+}
+
+#tools-menu.hidden {
+    display: none;
+}
+
+/* --- Sidebar Styling (Initial State: Hidden) --- */
+#sidebar {
+    width: 280px;
+    background-color: var(--bg-light);
+    border-right: 2px solid var(--color-neon); 
+    box-shadow: 5px 0 20px rgba(51, 255, 204, 0.3);
+    transform: translateX(-100%); 
+    transition: transform 0.5s ease;
+    position: fixed; 
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 30; 
+    display: flex; 
+    flex-direction: column;
+    padding-top: 100px; 
+}
+
+/* --- Big Top-Left Logo Area --- */
+#logo-sidebar-placeholder {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100px; 
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    background-color: var(--bg-light);
+    border-bottom: 1px solid var(--color-neon);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    z-index: 45;
+}
+
+#logo-sidebar-image {
+    max-width: 200px; 
+    max-height: 80px;  
+    height: auto;
+    filter: drop-shadow(0 0 15px var(--color-neon));
+    transition: all 0.5s;
+}
+
+/* --- New Chat Button --- */
+#new-chat-btn {
+    width: 80%;
+    padding: 12px;
+    margin: 15px 10% 15px; 
+    background-color: transparent;
+    color: var(--color-neon);
+    border: 2px solid var(--color-neon);
+    border-radius: 5px;
+    box-shadow: var(--shadow-intensity);
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 40;
+}
+#new-chat-btn:hover {
+    background-color: rgba(51, 255, 204, 0.1);
+    box-shadow: 0 0 20px var(--color-neon);
+}
+
+#chat-history {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-top: 10px;
+    padding-bottom: 20px; 
+}
+
+
+/* --- Input Container (Initial State: Centered) --- */
+#chat-input-container {
+    width: 60%;
+    max-width: 700px;
+    display: flex;
+    position: absolute; 
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%); 
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+    z-index: 30;
+    
+    border: 1px solid var(--color-neon);
+    box-shadow: var(--shadow-intensity);
+    border-radius: 25px;
+    padding: 2px;
+    background-color: var(--bg-light);
+}
+
+/* --- ACTIVE STATE (The "Wow" effect) --- */
+
+body.chat-active #main-content {
+    padding-left: 300px; 
+    justify-content: flex-start; 
+}
+
+body.chat-active #sidebar {
+    transform: translateX(0); 
+}
+
+body.chat-active #chat-input-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    width: calc(100% - 280px - 40px); 
+    max-width: 800px;
+    transform: translateX(-50%); 
+}
+
+#message-area {
+    display: none; 
+    width: 100%;
+    max-width: 800px;
+    padding-top: 20px; 
+    padding-bottom: 90px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+body.chat-active #message-area {
+    display: block; 
+}
+
+/* --- Message Bubbles --- */
+.message-bubble {
+    padding: 12px 18px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    max-width: 80%;
+    font-size: 0.95em;
+    display: block; 
+    clear: both; 
+}
+
+.user-message {
+    background-color: var(--color-neon);
+    color: var(--bg-dark);
+    margin-left: auto; 
+    margin-right: 0;
+    float: right; 
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 0 10px rgba(51, 255, 204, 0.5);
+}
+
+.ai-message {
+    background-color: var(--bg-light);
+    color: var(--color-text);
+    border: 1px solid var(--color-neon);
+    margin-right: auto; 
+    margin-left: 0;
+    float: left;
+    border-bottom-left-radius: 5px;
+}
+#message-area::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* --- Input/Send Button Styles --- */
+#chat-input {
+    flex-grow: 1;
+    padding: 15px;
+    border: none;
+    background-color: var(--bg-light);
+    color: var(--color-text);
+    border-radius: 25px 0 0 25px;
+    font-size: 1rem;
+    outline: none;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+    font-family: 'Orbitron', sans-serif;
+}
+#send-btn {
+    padding: 15px 20px;
+    border: none;
+    background-color: var(--color-neon);
+    color: var(--bg-dark);
+    font-weight: bold;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+}
+#send-btn:hover {
+    background-color: #5ff5d9;
+    box-shadow: var(--shadow-intensity);
+}

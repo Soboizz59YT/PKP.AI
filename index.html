@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKP.AI - Dynamic Chat Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <aside id="sidebar">
+        <div id="logo-sidebar-placeholder">
+            <img src="logo.jpg" alt="PKP.AI Logo" id="logo-sidebar-image">
+        </div>
+        
+        <button id="new-chat-btn">➕ New Chat</button>
+        <div id="chat-history">
+            </div>
+    </aside>
+
+    <main id="main-content">
+        <div id="tools-dropdown-container">
+            <button id="tools-btn">Tools ▼</button>
+            <div id="tools-menu" class="hidden">
+                <a href="#" data-tool="none" class="active-tool">None</a> <a href="#" data-tool="presentation">Presentation</a>
+                <a href="#" data-tool="image">Image</a>
+                <a href="#" data-tool="reports">Reports</a>
+            </div>
+        </div>
+
+        <div id="message-area">
+            </div>
+
+        <div id="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Start typing your message...">
+            <button id="send-btn">Send</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
